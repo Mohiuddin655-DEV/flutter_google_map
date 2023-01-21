@@ -19,12 +19,17 @@ class MyApp extends StatelessWidget {
       providers: [
         FutureProvider(create: (context) => locatorService.getLocation()),
         FutureProvider(create: (context) {
-          ImageConfiguration configuration = createLocalImageConfiguration(context);
-          return BitmapDescriptor.fromAssetImage(configuration, 'assets/images/parking-icon.png');
+          ImageConfiguration configuration =
+              createLocalImageConfiguration(context);
+          return BitmapDescriptor.fromAssetImage(
+              configuration, 'assets/images/parking-icon.png');
         }),
-        ProxyProvider2<Position,BitmapDescriptor,Future<List<Place>>>( 
-          update: (context,position,icon,places){
-            return (position !=null) ? placesService.getPlaces(position.latitude, position.longitude,icon) :null;
+        ProxyProvider2<Position, BitmapDescriptor, Future<List<Place>>>(
+          update: (context, position, icon, places) {
+            return (position != null)
+                ? placesService.getPlaces(
+                    position.latitude, position.longitude, icon)
+                : null;
           },
         )
       ],
